@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系統日誌查看器</title>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .status-bar {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .status-bar.connected {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-bar.disconnected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .log-container {
+            background: #2d2d2d;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .log-entry {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 3px;
+        }
+        .log-entry.error {
+            background: rgba(255,0,0,0.1);
+            border-left: 3px solid #ff4444;
+        }
+        .log-entry.api {
+            background: rgba(0,255,0,0.1);
+            border-left: 3px solid #00C851;
+        }
+        .log-entry.system {
+            background: rgba(0,0,255,0.1);
+            border-left: 3px solid #33b5e5;
+        }
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            opacity: 0.8;
+        }
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        .timestamp {
+            color: #888;
+            font-size: 0.9em;
+        }
+        .error-message {
+            color: #ff4444;
+        }
+        .success-message {
+            color: #00C851;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 系統日誌查看器</h1>
+        
+        <div id="statusBar" class="status-bar">
+            <span id="connectionStatus">檢查連接中...</span>
+            <span id="lastUpdate"></span>
+        </div>
+
+        <div class="controls">
+            <button onclick="refreshLogs()" class="btn-primary">🔄 刷新日誌</button>
+            <button onclick="clearLogs()" class="btn-danger">🗑️ 清理日誌</button>
+            <button onclick="testAPI()" class="btn-success">🧪 測試API</button>
+        </div>
+
+        <div id="errorLog" class="log-container">
+            <div class="log-entry system">
+                正在載入日誌...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3001';
+        let isConnected = false;
+
+        async function checkConnection() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                isConnected = true;
+                updateStatus(true, data.timestamp);
+            } catch (error) {
+                isConnected = false;
+                updateStatus(false);
+            }
+        }
+
+        function updateStatus(connected, timestamp = null) {
+            const statusBar = document.getElementById('statusBar');
+            const statusText = document.getElementById('connectionStatus');
+            const lastUpdate = document.getElementById('lastUpdate');
+
+            if (connected) {
+                statusBar.className = 'status-bar connected';
+                statusText.textContent = '🟢 已連接到伺服器';
+                if (timestamp) {
+                    lastUpdate.textContent = `最後更新: ${new Date(timestamp).toLocaleString()}`;
+                }
+            } else {
+                statusBar.className = 'status-bar disconnected';
+                statusText.textContent = '🔴 未連接到伺服器';
+                lastUpdate.textContent = '';
+            }
+        }
+
+        async function refreshLogs() {
+            if (!isConnected) {
+                alert('請先確保伺服器已連接');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/api/logs`);
+                const data = await response.json();
+                
+                const logContainer = document.getElementById('errorLog');
+                logContainer.innerHTML = '';
+
+                if (data.stats.totalErrors === 0) {
+                    logContainer.innerHTML = `
+                        <div class="log-entry system">
+                            ✅ 目前沒有錯誤日誌
+                            <div class="timestamp">${new Date().toLocaleString()}</div>
+                        </div>
+                    `;
+                } else {
+                    const lastError = data.stats.lastError;
+                    logContainer.innerHTML = `
+                        <div class="log-entry error">
+                            <div class="error-message">🚨 最後一次錯誤:</div>
+                            <pre>${lastError}</pre>
+                            <div class="timestamp">總錯誤數: ${data.stats.totalErrors}</div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('刷新日誌失敗:', error);
+                alert('無法讀取日誌');
+            }
+        }
+
+        async function clearLogs() {
+            if (!isConnected) {
+                alert('請先確保伺服器已連接');
+                return;
+            }
+
+            if (!confirm('確定要清理所有日誌嗎？這個操作無法撤銷。')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/api/logs/clear`, {
+                    method: 'POST'
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('日誌已清理並備份');
+                    refreshLogs();
+                } else {
+                    alert('清理日誌失敗: ' + data.error);
+                }
+            } catch (error) {
+                console.error('清理日誌失敗:', error);
+                alert('清理日誌時發生錯誤');
+            }
+        }
+
+        async function testAPI() {
+            if (!isConnected) {
+                alert('請先確保伺服器已連接');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_BASE}/api/test-api`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('API測試成功！');
+                } else {
+                    alert('API測試失敗: ' + data.error);
+                }
+            } catch (error) {
+                console.error('API測試失敗:', error);
+                alert('API測試時發生錯誤');
+            }
+        }
+
+        // 初始化
+        checkConnection();
+        setInterval(checkConnection, 5000);
+        refreshLogs();
+    </script>
+</body>
+</html> 

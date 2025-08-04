@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced AI內容生產器 - Jab, Jab, Jab, Right Hook</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .status-indicator {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .status-connected {
+            background: #27AE60;
+            color: white;
+        }
+        
+        .status-disconnected {
+            background: #E74C3C;
+            color: white;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+        
+        .input-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .output-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #2C3E50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3498DB;
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            color: #34495E;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+        
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #E8F4FD;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        input[type="text"]:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498DB;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .generate-btn {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .generate-btn:disabled {
+            background: #BDC3C7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7F8C8D;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498DB;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .content-item {
+            background: #F8F9FA;
+            border: 2px solid #E9ECEF;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .content-item:hover {
+            border-color: #3498DB;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.1);
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .content-number {
+            background: #3498DB;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .copy-btn {
+            background: #27AE60;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #229954;
+            transform: scale(1.05);
+        }
+        
+        .content-text {
+            line-height: 1.8;
+            color: #2C3E50;
+            font-size: 1.05em;
+            white-space: pre-wrap;
+        }
+        
+        .quality-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        
+        .quality-high {
+            background: #27AE60;
+            color: white;
+        }
+        
+        .quality-medium {
+            background: #F39C12;
+            color: white;
+        }
+        
+        .quality-low {
+            background: #E74C3C;
+            color: white;
+        }
+        
+        .api-selector {
+            background: #ECF0F1;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .api-config {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .api-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #27AE60;
+        }
+        
+        .api-status.inactive {
+            background: #95A5A6;
+        }
+        
+        .chat-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 2px solid #E8F4FD;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #FAFBFC;
+        }
+        
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 10px;
+        }
+        
+        .chat-user {
+            background: #3498DB;
+            color: white;
+            margin-left: 20%;
+        }
+        
+        .chat-ai {
+            background: #ECF0F1;
+            color: #2C3E50;
+            margin-right: 20%;
+        }
+        
+        .chat-input-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input {
+            flex: 1;
+        }
+        
+        .send-btn {
+            background: #3498DB;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .send-btn:hover {
+            background: #2980B9;
+            transform: translateY(-2px);
+        }
+        
+        .stats-section {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .input-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .status-indicator {
+                position: static;
+                margin-top: 15px;
+            }
+        }
+        
+        .advanced-options {
+            background: #F8F9FA;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px dashed #BDC3C7;
+        }
+        
+        .advanced-options h4 {
+            color: #7F8C8D;
+            margin-bottom: 15px;
+        }
+        
+        .toggle-advanced {
+            background: none;
+            border: none;
+            color: #3498DB;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Enhanced AI內容生產器</h1>
+            <p>基於《Jab, Jab, Jab, Right Hook》策略的智能內容創作系統</p>
+            <div id="connectionStatus" class="status-indicator status-disconnected">
+                🔴 檢查連接中...
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- 輸入區域 -->
+            <div class="input-section">
+                <h2 class="section-title">📝 內容設定</h2>
+                
+                <!-- API 配置選擇器 -->
+                <div class="api-selector">
+                    <h4>🔧 AI 模型配置</h4>
+                    <div id="apiConfigs"></div>
+                    <button onclick="refreshConfigs()" style="background: #3498DB; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">
+                        🔄 刷新配置
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label for="topic">🎯 內容主題</label>
+                    <input type="text" id="topic" placeholder="例如：職場壓力管理、時間管理技巧、團隊合作..." />
+                </div>
+
+                <div class="input-group">
+                    <div class="form-group">
+                        <label for="contentType">📊 內容類型</label>
+                        <select id="contentType">
+                            <option value="jab">Jab (鋪墊型 - 建立關係)</option>
+                            <option value="right-hook">Right Hook (主打型 - 轉化行動)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="platform">🌐 目標平台</label>
+                        <select id="platform">
+                            <option value="Facebook">Facebook</option>
+                            <option value="Instagram">Instagram</option>
+                            <option value="LinkedIn">LinkedIn</option>
+                            <option value="Twitter">Twitter</option>
+                            <option value="YouTube">YouTube</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <div class="form-group">
+                        <label for="style">🎨 內容風格</label>
+                        <select id="style">
+                            <option value="專業">專業權威</option>
+                            <option value="親切">親切友善</option>
+                            <option value="幽默">幽默風趣</option>
+                            <option value="激勵">激勵鼓舞</option>
+                            <option value="原生風格">原生風格</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="count">📈 生成數量</label>
+                        <select id="count">
+                            <option value="1">1篇 (快速)</option>
+                            <option value="2">2篇 (推薦)</option>
+                            <option value="3">3篇 (深度)</option>
+                            <option value="5">5篇 (批量)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="toggleAdvanced()" class="toggle-advanced">⚙️ 進階選項</button>
+                
+                <div id="advancedOptions" class="advanced-options" style="display: none;">
+                    <h4>🔬 進階設定</h4>
+                    <div class="form-group">
+                        <label for="customPrompt">📝 自定義提示詞 (選填)</label>
+                        <textarea id="customPrompt" rows="3" placeholder="在此添加特殊要求或風格指導..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="qualityCheck"> 
+                            啟用品質檢查 (較慢但品質更高)
+                        </label>
+                    </div>
+                </div>
+
+                <button id="generateBtn" onclick="generateContent()" class="generate-btn">
+                    🚀 生成內容
+                </button>
+            </div>
+
+            <!-- 輸出區域 -->
+            <div class="output-section">
+                <h2 class="section-title">📄 生成結果</h2>
+                <div id="output">
+                    <div style="text-align: center; padding: 40px; color: #7F8C8D;">
+                        <div style="font-size: 3em; margin-bottom: 20px;">🎯</div>
+                        <h3>準備創作優質內容</h3>
+                        <p>填寫左側設定，開始您的內容創作之旅</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 統計資訊 -->
+        <div class="stats-section">
+            <div class="stat-item">
+                <div class="stat-number" id="totalGenerated">0</div>
+                <div class="stat-label">總生成內容</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="successRate">0%</div>
+                <div class="stat-label">成功率</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="avgQuality">0</div>
+                <div class="stat-label">平均品質分數</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="currentModel">N/A</div>
+                <div class="stat-label">當前模型</div>
+            </div>
+        </div>
+
+        <!-- AI 聊天助手 -->
+        <div class="chat-section">
+            <h2 class="section-title">💬 AI 行銷顧問</h2>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message chat-ai">
+                    <strong>AI顧問：</strong> 您好！我是您的專屬行銷顧問，精通《Jab, Jab, Jab, Right Hook》策略。有什麼內容創作或行銷問題需要協助嗎？
+                </div>
+            </div>
+            <div class="chat-input-group">
+                <input type="text" id="chatInput" class="chat-input" placeholder="詢問行銷策略、內容優化建議..." 
+                       onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()" class="send-btn">📤 發送</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3001';
+        let isConnected = false;
+        let stats = {
+            totalGenerated: 0,
+            successCount: 0,
+            totalQuality: 0
+        };
+        let chatHistory = [];
+
+        // 檢查連接狀態
+        async function checkConnection() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                isConnected = true;
+                updateConnectionStatus(true);
+                updateStats();
+            } catch (error) {
+                isConnected = false;
+                updateConnectionStatus(false);
+            }
+        }
+
+        // 更新連接狀態顯示
+        function updateConnectionStatus(connected) {
+            const statusElement = document.getElementById('connectionStatus');
+            if (connected) {
+                statusElement.className = 'status-indicator status-connected';
+                statusElement.textContent = '🟢 已連接 (Enhanced)';
+            } else {
+                statusElement.className = 'status-indicator status-disconnected';
+                statusElement.textContent = '🔴 連接失敗';
+            }
+        }
+
+        // 載入API配置
+        async function loadApiConfigs() {
+            try {
+                const response = await fetch(`${API_BASE}/api/configs`);
+                const data = await response.json();
+                
+                const configsContainer = document.getElementById('apiConfigs');
+                configsContainer.innerHTML = '';
+                
+                data.configs.forEach((config, index) => {
+                    const configDiv = document.createElement('div');
+                    configDiv.className = 'api-config';
+                    configDiv.innerHTML = `
+                        <div class="api-status ${config.current ? '' : 'inactive'}"></div>
+                        <span style="flex: 1; cursor: pointer;" onclick="switchConfig(${index})">
+                            ${config.name} (${config.model})
+                        </span>
+                        ${config.current ? '<span style="color: #27AE60; font-weight: 600;">當前</span>' : ''}
+                    `;
+                    configsContainer.appendChild(configDiv);
+                });
+                
+                // 更新當前模型顯示
+                const currentConfig = data.configs.find(c => c.current);
+                if (currentConfig) {
+                    document.getElementById('currentModel').textContent = currentConfig.name;
+                }
+            } catch (error) {
+                console.error('載入API配置失敗:', error);
+            }
+        }
+
+        // 切換API配置
+        async function switchConfig(index) {
+            try {
+                const response = await fetch(`${API_BASE}/api/switch-config`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ configIndex: index })
+                });
+                
+                if (response.ok) {
+                    loadApiConfigs();
+                    showToast('配置切換成功', 'success');
+                }
+            } catch (error) {
+                showToast('配置切換失敗', 'error');
+            }
+        }
+
+        // 刷新配置
+        function refreshConfigs() {
+            loadApiConfigs();
+            showToast('配置已刷新', 'info');
+        }
+
+        // 切換進階選項
+        function toggleAdvanced() {
+            const options = document.getElementById('advancedOptions');
+            options.style.display = options.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // 生成內容
+        async function generateContent() {
+            if (!isConnected) {
+                showToast('請先確保服務器連接正常', 'error');
+                return;
+            }
+
+            const topic = document.getElementById('topic').value.trim();
+            if (!topic) {
+                showToast('請輸入內容主題', 'warning');
+                return;
+            }
+
+            const generateBtn = document.getElementById('generateBtn');
+            const output = document.getElementById('output');
+            
+            // 禁用按鈕並顯示載入狀態
+            generateBtn.disabled = true;
+            generateBtn.textContent = '🔄 生成中...';
+            
+            output.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <h3>AI 正在創作中...</h3>
+                    <p>預計需要 30-60 秒，請耐心等待</p>
+                    <div style="margin-top: 20px; padding: 15px; background: #E8F6F3; border-radius: 10px; color: #27AE60;">
+                        💡 <strong>提示：</strong>我們使用多個AI模型確保最佳品質
+                    </div>
+                </div>
+            `;
+
+            try {
+                const requestData = {
+                    topic: topic,
+                    contentType: document.getElementById('contentType').value,
+                    platform: document.getElementById('platform').value,
+                    style: document.getElementById('style').value,
+                    count: parseInt(document.getElementById('count').value),
+                    customPrompt: document.getElementById('customPrompt').value,
+                    qualityCheck: document.getElementById('qualityCheck').checked
+                };
+
+                const response = await fetch(`${API_BASE}/api/generate-content`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(requestData),
+                    signal: AbortSignal.timeout(120000) // 2分鐘超時
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    displayContent(data.contents, data.metadata);
+                    updateStatsAfterGeneration(data);
+                    showToast(`成功生成 ${data.contents.length} 篇內容`, 'success');
+                } else {
+                    throw new Error(data.error || '生成失敗');
+                }
+
+            } catch (error) {
+                console.error('生成內容失敗:', error);
+                output.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #E74C3C;">
+                        <div style="font-size: 3em; margin-bottom: 20px;">⚠️</div>
+                        <h3>生成失敗</h3>
+                        <p>${error.message}</p>
+                        <div style="margin-top: 20px;">
+                            <button onclick="generateContent()" style="background: #3498DB; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer;">
+                                🔄 重試
+                            </button>
+                        </div>
+                    </div>
+                `;
+                showToast('內容生成失敗，請重試', 'error');
+            } finally {
+                // 恢復按鈕狀態
+                generateBtn.disabled = false;
+                generateBtn.textContent = '🚀 生成內容';
+            }
+        }
+
+        // 顯示生成的內容
+        function displayContent(contents, metadata) {
+            const output = document.getElementById('output');
+            
+            let html = `
+                <div style="background: #E8F6F3; padding: 15px; border-radius: 10px; margin-bottom: 20px; color: #27AE60;">
+                    ✅ <strong>生成完成！</strong> 共 ${contents.length} 篇內容 
+                    (處理時間: ${metadata.processingTime}ms, 模型: ${metadata.api_config})
+                </div>
+            `;
+
+            contents.forEach((content, index) => {
+                const quality = assessContentQuality(content);
+                html += `
+                    <div class="content-item">
+                        <div class="content-header">
+                            <span class="content-number">內容 ${index + 1}</span>
+                            <button class="copy-btn" onclick="copyContent('${index}')">📋 複製</button>
+                        </div>
+                        <div class="quality-indicator quality-${quality.level}">
+                            品質: ${quality.score}
+                        </div>
+                        <div class="content-text" id="content-${index}">${content}</div>
+                    </div>
+                `;
+            });
+
+            output.innerHTML = html;
+        }
+
+        // 評估內容品質
+        function assessContentQuality(content) {
+            let score = 0;
+            let level = 'low';
+
+            // 長度評分
+            if (content.length >= 100 && content.length <= 1000) score += 30;
+            
+            // 結構評分
+            if (content.includes('\n') || content.includes('。')) score += 20;
+            
+            // 表情符號評分
+            if (/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]/gu.test(content)) score += 15;
+            
+            // 互動元素評分
+            if (content.includes('？') || content.includes('！')) score += 15;
+            
+            // 專業詞彙評分
+            const professionalTerms = ['策略', '價值', '專業', '經驗', '成功', '成長'];
+            const foundTerms = professionalTerms.filter(term => content.includes(term));
+            score += foundTerms.length * 4;
+
+            if (score >= 80) level = 'high';
+            else if (score >= 60) level = 'medium';
+
+            return { score, level };
+        }
+
+        // 複製內容
+        async function copyContent(index) {
+            const content = document.getElementById(`content-${index}`).textContent;
+            try {
+                await navigator.clipboard.writeText(content);
+                showToast('內容已複製到剪貼板', 'success');
+            } catch (error) {
+                showToast('複製失敗，請手動選擇複製', 'error');
+            }
+        }
+
+        // 發送聊天訊息
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // 添加用戶訊息
+            addChatMessage('user', message);
+            input.value = '';
+            
+            // 添加載入訊息
+            const loadingId = addChatMessage('ai', '正在思考中...', true);
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message, history: chatHistory })
+                });
+                
+                const data = await response.json();
+                
+                // 移除載入訊息並添加回覆
+                document.getElementById(loadingId).remove();
+                addChatMessage('ai', data.reply);
+                
+                // 更新聊天歷史
+                chatHistory.push({ user: message, ai: data.reply });
+                if (chatHistory.length > 10) chatHistory.shift(); // 保持最近10條對話
+                
+            } catch (error) {
+                document.getElementById(loadingId).remove();
+                addChatMessage('ai', '抱歉，我暫時無法回應。請稍後再試。');
+            }
+        }
+
+        // 添加聊天訊息
+        function addChatMessage(sender, message, isLoading = false) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            const messageId = 'msg-' + Date.now();
+            
+            messageDiv.id = messageId;
+            messageDiv.className = `chat-message chat-${sender}`;
+            
+            if (sender === 'user') {
+                messageDiv.innerHTML = `<strong>您：</strong> ${message}`;
+            } else {
+                messageDiv.innerHTML = `<strong>AI顧問：</strong> ${message}`;
+                if (isLoading) {
+                    messageDiv.style.opacity = '0.7';
+                }
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            return messageId;
+        }
+
+        // 更新統計資料
+        function updateStatsAfterGeneration(data) {
+            stats.totalGenerated += data.contents.length;
+            stats.successCount += data.contents.length;
+            
+            // 計算平均品質
+            let totalQuality = 0;
+            data.contents.forEach(content => {
+                totalQuality += assessContentQuality(content).score;
+            });
+            stats.totalQuality += totalQuality;
+            
+            updateStats();
+        }
+
+        // 更新統計顯示
+        function updateStats() {
+            document.getElementById('totalGenerated').textContent = stats.totalGenerated;
+            
+            const successRate = stats.totalGenerated > 0 ? 
+                Math.round((stats.successCount / stats.totalGenerated) * 100) : 0;
+            document.getElementById('successRate').textContent = successRate + '%';
+            
+            const avgQuality = stats.totalGenerated > 0 ? 
+                Math.round(stats.totalQuality / stats.totalGenerated) : 0;
+            document.getElementById('avgQuality').textContent = avgQuality;
+        }
+
+        // 顯示提示訊息
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 10px;
+                color: white;
+                font-weight: 600;
+                z-index: 1000;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+            `;
+            
+            const colors = {
+                success: '#27AE60',
+                error: '#E74C3C',
+                warning: '#F39C12',
+                info: '#3498DB'
+            };
+            
+            toast.style.background = colors[type] || colors.info;
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => document.body.removeChild(toast), 300);
+            }, 3000);
+        }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            checkConnection();
+            loadApiConfigs();
+            setInterval(checkConnection, 30000); // 每30秒檢查一次連接
+            
+            // 設定默認值
+            document.getElementById('qualityCheck').checked = true;
+        });
+    </script>
+</body>
+</html> 

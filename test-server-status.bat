@@ -1,0 +1,3 @@
+@echo off
+echo Checking server status...
+node status-check.js

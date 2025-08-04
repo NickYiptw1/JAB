@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI內容生產器 - 測試頁面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f0f2f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI內容生產器測試頁面</h1>
+        <div id="status" class="status">檢查連接中...</div>
+        <button onclick="testAPI()">測試API</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function checkConnection() {
+            try {
+                const response = await fetch('http://localhost:3001/health');
+                const data = await response.json();
+                document.getElementById('status').className = 'status success';
+                document.getElementById('status').textContent = '✅ 已連接';
+                return true;
+            } catch (error) {
+                document.getElementById('status').className = 'status error';
+                document.getElementById('status').textContent = '❌ 連接失敗';
+                return false;
+            }
+        }
+
+        async function testAPI() {
+            const result = document.getElementById('result');
+            try {
+                const response = await fetch('http://localhost:3001/api/generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        topic: '測試主題',
+                        contentType: 'jab',
+                        platform: 'Facebook',
+                        style: '專業'
+                    })
+                });
+                const data = await response.json();
+                result.innerHTML = `
+                    <div class="status success">
+                        <h3>測試成功</h3>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                `;
+            } catch (error) {
+                result.innerHTML = `
+                    <div class="status error">
+                        <h3>測試失敗</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // 初始檢查
+        checkConnection();
+        // 定期檢查連接
+        setInterval(checkConnection, 30000);
+    </script>
+</body>
+</html>
