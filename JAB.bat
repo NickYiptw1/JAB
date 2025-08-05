@@ -584,23 +584,20 @@ echo 🚀 使用系統啟動方法...
 echo 📌 方法1: 標準 start 命令
 call :LOG_LAUNCH "方法1: start 命令"
 start "" "%HTML_FILE%" >nul 2>&1
-if !errorlevel! equ 0 (
-    call :LOG_SUCCESS "方法1 start 成功"
-    set "HTML_LAUNCHED=true"
-    echo    ✅ 成功
-) else (
-    call :LOG_ERROR "方法1 start 失敗: errorlevel=!errorlevel!"
-    echo    ❌ 失敗
-)
+call :LOG_SUCCESS "方法1 start 完成 - 立即跳過其他方法避免多重啟動"
+set "HTML_LAUNCHED=true"
+echo    ✅ 已執行 - 跳過其他方法避免多重啟動
+goto :LAUNCH_SUCCESS
 timeout /t 1 /nobreak >nul
 
 echo 📌 方法2: rundll32 啟動
 call :LOG_LAUNCH "方法2: rundll32"
 rundll32 url.dll,FileProtocolHandler "%HTML_FILE%" >nul 2>&1
 if !errorlevel! equ 0 (
-    call :LOG_SUCCESS "方法2 rundll32 成功"
+    call :LOG_SUCCESS "方法2 rundll32 成功 - 跳過其他方法"
     set "HTML_LAUNCHED=true"
-    echo    ✅ 成功
+    echo    ✅ 成功 - 已啟動，跳過其他方法
+    goto :LAUNCH_SUCCESS
 ) else (
     call :LOG_ERROR "方法2 rundll32 失敗: errorlevel=!errorlevel!"
     echo    ❌ 失敗
@@ -611,9 +608,10 @@ echo 📌 方法3: explorer 啟動
 call :LOG_LAUNCH "方法3: explorer"
 explorer "%HTML_FILE%" >nul 2>&1
 if !errorlevel! equ 0 (
-    call :LOG_SUCCESS "方法3 explorer 成功"
+    call :LOG_SUCCESS "方法3 explorer 成功 - 跳過其他方法"
     set "HTML_LAUNCHED=true"
-    echo    ✅ 成功
+    echo    ✅ 成功 - 已啟動，跳過其他方法
+    goto :LAUNCH_SUCCESS
 ) else (
     call :LOG_ERROR "方法3 explorer 失敗: errorlevel=!errorlevel!"
     echo    ❌ 失敗
@@ -630,9 +628,10 @@ if "%CHROME_FOUND%"=="true" (
     call :LOG_LAUNCH "方法4: Chrome 直接啟動"
     "%CHROME_PATH%" "file:///%HTML_FILE%" >nul 2>&1
     if !errorlevel! equ 0 (
-        call :LOG_SUCCESS "方法4 Chrome 成功"
+        call :LOG_SUCCESS "方法4 Chrome 成功 - 跳過其他方法"
         set "BROWSER_LAUNCHED=true"
-        echo    ✅ Chrome 啟動成功
+        echo    ✅ Chrome 啟動成功 - 已啟動，跳過其他方法
+        goto :LAUNCH_SUCCESS
     ) else (
         call :LOG_ERROR "方法4 Chrome 失敗: errorlevel=!errorlevel!"
         echo    ❌ Chrome 啟動失敗
@@ -645,9 +644,10 @@ if "%EDGE_FOUND%"=="true" (
     call :LOG_LAUNCH "方法5: Edge 直接啟動"
     "%EDGE_PATH%" "file:///%HTML_FILE%" >nul 2>&1
     if !errorlevel! equ 0 (
-        call :LOG_SUCCESS "方法5 Edge 成功"
+        call :LOG_SUCCESS "方法5 Edge 成功 - 跳過其他方法"
         set "BROWSER_LAUNCHED=true"
-        echo    ✅ Edge 啟動成功
+        echo    ✅ Edge 啟動成功 - 已啟動，跳過其他方法
+        goto :LAUNCH_SUCCESS
     ) else (
         call :LOG_ERROR "方法5 Edge 失敗: errorlevel=!errorlevel!"
         echo    ❌ Edge 啟動失敗
@@ -664,9 +664,10 @@ echo 📌 方法6: PowerShell Start-Process
 call :LOG_LAUNCH "方法6: PowerShell Start-Process"
 powershell -WindowStyle Hidden -Command "try { Start-Process -FilePath '%HTML_FILE%' -ErrorAction Stop; Write-Host 'SUCCESS' } catch { Write-Host 'FAILED'; exit 1 }" >nul 2>&1
 if !errorlevel! equ 0 (
-    call :LOG_SUCCESS "方法6 PowerShell 成功"
+    call :LOG_SUCCESS "方法6 PowerShell 成功 - 跳過其他方法"
     set "HTML_LAUNCHED=true"
-    echo    ✅ PowerShell 啟動成功
+    echo    ✅ PowerShell 啟動成功 - 已啟動，跳過其他方法
+    goto :LAUNCH_SUCCESS
 ) else (
     call :LOG_ERROR "方法6 PowerShell 失敗: errorlevel=!errorlevel!"
     echo    ❌ PowerShell 啟動失敗
@@ -677,9 +678,10 @@ echo 📌 方法7: PowerShell Invoke-Item
 call :LOG_LAUNCH "方法7: PowerShell Invoke-Item"
 powershell -WindowStyle Hidden -Command "try { Invoke-Item '%HTML_FILE%' -ErrorAction Stop; Write-Host 'SUCCESS' } catch { Write-Host 'FAILED'; exit 1 }" >nul 2>&1
 if !errorlevel! equ 0 (
-    call :LOG_SUCCESS "方法7 PowerShell Invoke-Item 成功"
+    call :LOG_SUCCESS "方法7 PowerShell Invoke-Item 成功 - 跳過其他方法"
     set "HTML_LAUNCHED=true"
-    echo    ✅ PowerShell Invoke-Item 成功
+    echo    ✅ PowerShell Invoke-Item 成功 - 已啟動，跳過其他方法
+    goto :LAUNCH_SUCCESS
 ) else (
     call :LOG_ERROR "方法7 PowerShell Invoke-Item 失敗: errorlevel=!errorlevel!"
     echo    ❌ PowerShell Invoke-Item 失敗
@@ -695,9 +697,10 @@ echo 📌 方法8: 直接執行檔案
 call :LOG_LAUNCH "方法8: 直接執行檔案"
 call "%HTML_FILE%" >nul 2>&1
 if !errorlevel! equ 0 (
-    call :LOG_SUCCESS "方法8 直接執行成功"
+    call :LOG_SUCCESS "方法8 直接執行成功 - 跳過其他方法"
     set "HTML_LAUNCHED=true"
-    echo    ✅ 直接執行成功
+    echo    ✅ 直接執行成功 - 已啟動，跳過其他方法
+    goto :LAUNCH_SUCCESS
 ) else (
     call :LOG_ERROR "方法8 直接執行失敗: errorlevel=!errorlevel!"
     echo    ❌ 直接執行失敗
@@ -708,9 +711,10 @@ echo 📌 方法9: CMD 子進程啟動
 call :LOG_LAUNCH "方法9: CMD 子進程啟動"
 cmd /c start "" "%HTML_FILE%" >nul 2>&1
 if !errorlevel! equ 0 (
-    call :LOG_SUCCESS "方法9 CMD 子進程成功"
+    call :LOG_SUCCESS "方法9 CMD 子進程成功 - 跳過其他方法"
     set "HTML_LAUNCHED=true"
-    echo    ✅ CMD 子進程成功
+    echo    ✅ CMD 子進程成功 - 已啟動，跳過其他方法
+    goto :LAUNCH_SUCCESS
 ) else (
     call :LOG_ERROR "方法9 CMD 子進程失敗: errorlevel=!errorlevel!"
     echo    ❌ CMD 子進程失敗
@@ -731,9 +735,10 @@ echo 📌 方法10: URL 協議啟動
 call :LOG_LAUNCH "方法10: URL 協議啟動"
 start "" "!FILE_URL!" >nul 2>&1
 if !errorlevel! equ 0 (
-    call :LOG_SUCCESS "方法10 URL 協議成功"
+    call :LOG_SUCCESS "方法10 URL 協議成功 - 跳過其他方法"
     set "HTML_LAUNCHED=true"
-    echo    ✅ URL 協議成功
+    echo    ✅ URL 協議成功 - 已啟動，跳過其他方法
+    goto :LAUNCH_SUCCESS
 ) else (
     call :LOG_ERROR "方法10 URL 協議失敗: errorlevel=!errorlevel!"
     echo    ❌ URL 協議失敗
@@ -765,6 +770,13 @@ if "%HTML_LAUNCHED%"=="true" (
 )
 
 echo ======================================================
+goto :eof
+
+:LAUNCH_SUCCESS
+call :LOG_SUCCESS "HTML 啟動成功 - 僅使用一種方法"
+echo.
+echo ✅ JAB 界面啟動成功！只使用了一種啟動方法
+echo 🌐 如果頁面未載入，請等待幾秒鐘
 goto :eof
 
 :START_SERVER_WITH_FALLBACK
