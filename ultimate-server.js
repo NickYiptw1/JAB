@@ -882,6 +882,189 @@ app.get('/api/ultimate-configs', (req, res) => {
     });
 });
 
+// 標準內容生成API（支援多樣性參數）
+app.post('/api/generate-content', async (req, res) => {
+    const startTime = Date.now();
+    
+    try {
+        const { 
+            topic, 
+            contentType, 
+            platform, 
+            style, 
+            count = 1, 
+            creativity = 70,
+            model,
+            // 強化的多樣性參數
+            baseVariationSeed,
+            multipleVariations,
+            diversityLevel,
+            forceUnique,
+            timestamp,
+            requestId
+        } = req.body;
+        
+        logUltimate('info', 'Enhanced Diversity Generation', { 
+            topic, 
+            contentType, 
+            platform, 
+            style, 
+            count,
+            requestId,
+            diversityLevel,
+            forceUnique,
+            hasMultipleVariations: !!multipleVariations
+        });
+
+        if (!topic || topic.trim() === '') {
+            return res.status(400).json({
+                error: '主題不能為空',
+                suggestion: '請提供具體的主題內容'
+            });
+        }
+
+        const results = [];
+        
+        for (let i = 0; i < parseInt(count); i++) {
+            console.log(`\n🎯 生成強化多樣性內容 ${i + 1}/${count}...`);
+            console.log(`🔀 多樣性等級: ${diversityLevel}, 強制唯一: ${forceUnique}`);
+            
+            const currentVariation = multipleVariations && multipleVariations[i] ? multipleVariations[i] : null;
+            
+            if (currentVariation) {
+                console.log(`🌟 變化ID: ${currentVariation.uniqueId}`);
+                console.log(`🎨 關鍵字: ${currentVariation.keywords.perspective} × ${currentVariation.keywords.approach} × ${currentVariation.keywords.tone}`);
+                if (currentVariation.constraints) {
+                    console.log(`📋 限制: ${currentVariation.constraints.contentStyle} | ${currentVariation.constraints.structure}`);
+                }
+            }
+            
+            try {
+                // 為每篇內容創建完全不同的提示
+                const uniquePrompt = createDiversePrompt(i, currentVariation, parseInt(count));
+                
+                console.log(`📝 獨特提示 ${i + 1}: ${uniquePrompt.substring(0, 100)}...`);
+                
+                const result = await generateUltimateContent(
+                    topic, 
+                    contentType, 
+                    platform, 
+                    style, 
+                    uniquePrompt
+                );
+                
+                // 添加變化資訊到結果中
+                result.variationInfo = currentVariation;
+                results.push(result);
+                console.log(`✅ 強化多樣性內容 ${i + 1} 生成完成 (${result.metadata.processingTime}ms)`);
+                
+            } catch (error) {
+                logUltimate('error', `Enhanced Diverse Content ${i + 1} Generation Failed`, { error: error.message });
+                
+                // 提供備用內容
+                results.push({
+                    content: `由於技術問題，此篇內容暫時無法生成。請稍後重試。\n\n💡 建議嘗試調整創意度或選擇其他風格。`,
+                    metadata: {
+                        processingTime: Date.now() - startTime,
+                        quality: 'fallback',
+                        error: true,
+                        variation: i + 1,
+                        diversityLevel: diversityLevel
+                    },
+                    variationInfo: currentVariation
+                });
+            }
+        }
+
+        const totalTime = Date.now() - startTime;
+        
+        logUltimate('success', 'Diverse Content Generation Complete', {
+            topic,
+            totalContent: results.length,
+            totalTime: `${totalTime}ms`,
+            requestId,
+            diversityApplied: true
+        });
+
+        res.json({
+            success: true,
+            contents: results.map(r => r.content),
+            metadata: {
+                topic,
+                contentType,
+                platform,
+                style,
+                count: results.length,
+                totalProcessingTime: totalTime,
+                averageTime: Math.round(totalTime / results.length),
+                diversityApplied: true,
+                variationSeed,
+                requestId,
+                features: [
+                    '多樣性機制',
+                    '獨特變化',
+                    '風格差異',
+                    '內容創新'
+                ]
+            }
+        });
+
+    } catch (error) {
+        const totalTime = Date.now() - startTime;
+        
+        logUltimate('error', 'Diverse Generation Critical Error', {
+            error: error.message,
+            totalTime: `${totalTime}ms`,
+            request: req.body
+        });
+
+        res.status(500).json({
+            error: '多樣化內容生成服務暫時無法使用',
+            details: error.message,
+            timestamp: new Date().toISOString(),
+            processingTime: totalTime
+        });
+    }
+});
+
+// 強化的多樣化提示創建函數
+function createDiversePrompt(index, variation, totalCount) {
+    const constraintPrompts = [
+        '請務必確保內容完全不同於其他版本',
+        '採用截然不同的表達方式和角度',
+        '使用獨特的開場和結構安排',
+        '提供與眾不同的洞察和觀點',
+        '展現全新的思考路徑和邏輯'
+    ];
+    
+    const structureRequirements = [
+        '使用不同的段落組織方式',
+        '採用差異化的內容展開邏輯',
+        '運用多樣化的表達技巧',
+        '提供不同深度的內容層次',
+        '呈現各異的重點和焦點'
+    ];
+    
+    let diversePrompt = `這是第${index + 1}篇，共${totalCount}篇內容。${constraintPrompts[index % constraintPrompts.length]}。`;
+    
+    if (variation && variation.keywords) {
+        diversePrompt += `請採用${variation.keywords.perspective}的視角，運用${variation.keywords.approach}的方法，保持${variation.keywords.tone}的語調，並使用${variation.keywords.format}的呈現方式，聚焦於${variation.keywords.angle}的角度。`;
+    }
+    
+    if (variation && variation.constraints) {
+        diversePrompt += `內容應為${variation.constraints.length}，結構採用${variation.constraints.structure}，重點在於${variation.constraints.focus}，目標受眾為${variation.constraints.audience}，風格定位為${variation.constraints.contentStyle}。`;
+    }
+    
+    diversePrompt += `${structureRequirements[index % structureRequirements.length]}。`;
+    
+    // 強制差異化要求
+    if (totalCount > 1) {
+        diversePrompt += `特別重要：這篇內容必須與其他${totalCount - 1}篇在以下方面完全不同：1)開場方式 2)主要論點 3)舉例說明 4)表達風格 5)結構安排。請確保即使是相同主題，也要呈現完全不同的內容和角度。`;
+    }
+    
+    return diversePrompt;
+}
+
 // 日誌查看API
 app.get('/api/logs/:type', (req, res) => {
     try {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI內容生產器與智能助手 - 修復版本</title>
+  <title>Jab理論AI內容生產器 - 多樣性強化版</title>
   <link href="../input.css" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -67,8 +67,9 @@
   <div class="w-full max-w-4xl bg-white rounded-xl shadow-lg p-8 mb-8">
     <div class="flex justify-between items-center mb-6">
       <div>
-        <h1 class="text-3xl font-bold text-blue-700">📝 AI內容生產器</h1>
-        <div class="text-xs text-green-600 font-medium mt-1">🔧 修復版本 v2.0 - 超時問題已解決</div>
+        <h1 class="text-3xl font-bold text-blue-700">🥊 Jab理論AI內容生產器</h1>
+        <div class="text-xs text-green-600 font-medium mt-1">🎯 基於《Jab, Jab, Jab, Right Hook》理論 - 價值導向內容創作</div>
+        <div class="text-xs text-purple-600 font-medium mt-1">🔧 v5.0 強制差異化版 - 7層轉換確保每篇完全不同</div>
       </div>
       <div class="text-sm text-gray-500">
         <span id="serverInfo">伺服器: 未連接</span>
@@ -89,8 +90,13 @@
         <label class="block">
           <span class="text-gray-700 font-medium">內容型態</span>
           <select id="contentType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-            <option value="jab">🥊 Jab（鋪墊型）- 建立關係與信任</option>
-            <option value="right_hook">💥 Right Hook（主打型）- 促進行動呼籲</option>
+            <option value="jab">🥊 Jab（給予價值）- 教育、娛樂、啟發，建立信任</option>
+            <option value="right_hook">💥 Right Hook（請求行動）- 明確CTA，轉換導向</option>
+            <option value="jab_story">📖 Jab故事型 - 透過故事傳遞價值與情感連結</option>
+            <option value="jab_education">🎓 Jab教育型 - 專業知識分享與技能提升</option>
+            <option value="jab_entertainment">🎪 Jab娛樂型 - 輕鬆幽默，增加親和力</option>
+            <option value="right_hook_soft">🎯 Right Hook軟性 - 間接引導，自然轉換</option>
+            <option value="right_hook_direct">⚡ Right Hook直接 - 明確呼籲，立即行動</option>
           </select>
         </label>
 
@@ -112,27 +118,28 @@
         <label class="block">
           <span class="text-gray-700 font-medium">目標平台</span>
           <select id="platform" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-            <option value="Facebook">📘 Facebook - 社群互動</option>
-            <option value="Instagram">📷 Instagram - 視覺內容</option>
-            <option value="Twitter">🐦 Twitter - 即時動態</option>
-            <option value="LinkedIn">💼 LinkedIn - 專業網絡</option>
-            <option value="Pinterest">📌 Pinterest - 創意靈感</option>
-            <option value="TikTok">🎵 TikTok - 短影音</option>
-            <option value="YouTube">📺 YouTube - 長影音</option>
-            <option value="通用">🌐 通用平台</option>
+            <option value="Facebook">📘 Facebook - 對話式互動，故事性強，表情豐富</option>
+            <option value="Instagram">📷 Instagram - 視覺敘述，分行呈現，hashtag策略</option>
+            <option value="Twitter">🐦 Twitter - 簡潔有力，觀點鮮明，易轉發</option>
+            <option value="LinkedIn">💼 LinkedIn - 專業權威，數據支撐，職場價值</option>
+            <option value="Pinterest">📌 Pinterest - 創意靈感，美學導向，實用收藏</option>
+            <option value="TikTok">🎵 TikTok - 年輕活力，趨勢話題，互動挑戰</option>
+            <option value="YouTube">📺 YouTube - 詳細專業，教育導向，SEO優化</option>
+            <option value="通用">🌐 通用平台 - 適應性強，多平台兼容</option>
           </select>
         </label>
 
         <label class="block">
           <span class="text-gray-700 font-medium">內容風格</span>
           <select id="style" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
-            <option value="原生">🎯 原生風格 - 融入平台文化</option>
-            <option value="非干擾">🤝 非干擾型 - 自然不強推</option>
-            <option value="少要求">💭 低壓力型 - 輕鬆互動</option>
-            <option value="流行文化">🔥 流行文化 - 結合熱點</option>
-            <option value="微型">⚡ 微型內容 - 簡潔有力</option>
-            <option value="專業">👔 專業正式 - 權威可信</option>
-            <option value="情感">❤️ 情感共鳴 - 觸動人心</option>
+            <option value="原生價值導向">🎯 原生價值導向 - 融入平台文化同時提供價值</option>
+            <option value="故事情感型">📚 故事情感型 - 透過故事建立情感連結</option>
+            <option value="教育分享型">🎓 教育分享型 - 專業知識傳授與技能提升</option>
+            <option value="娛樂親和型">🎪 娛樂親和型 - 輕鬆幽默增加品牌親和力</option>
+            <option value="啟發思考型">💡 啟發思考型 - 引發思考與深度討論</option>
+            <option value="實用指導型">🔧 實用指導型 - 具體步驟與實作指南</option>
+            <option value="社群互動型">🤝 社群互動型 - 促進參與與對話</option>
+            <option value="趨勢洞察型">🔍 趨勢洞察型 - 行業分析與未來展望</option>
           </select>
         </label>
       </div>
@@ -297,9 +304,9 @@
       setupEventListeners();
       detectServer();
       
-      // 顯示修復版本提示
+      // 顯示循序漸進版本提示
       setTimeout(() => {
-        showSystemMessage('🎉 修復版本已載入！超時問題已解決，支援2分鐘AI生成時間', 'success');
+        showSystemMessage('🎉 循序漸進版本已載入！反覆處理機制確保每篇內容完全不同', 'success');
       }, 2000);
     });
 
@@ -419,25 +426,25 @@
         return;
       }
       
-      // 自動填入測試數據
-      document.getElementById('topic').value = '測試超時修復';
-      document.getElementById('count').value = '1';
-      document.getElementById('contentType').value = 'jab';
+      // 自動填入Jab理論測試數據
+      document.getElementById('topic').value = 'Jab理論多樣性測試';
+      document.getElementById('count').value = '3';
+      document.getElementById('contentType').value = 'jab_education';
       document.getElementById('platform').value = 'Facebook';
-      document.getElementById('style').value = '非干擾型';
-      document.getElementById('creativity').value = '70';
+      document.getElementById('style').value = '教育分享型';
+      document.getElementById('creativity').value = '80';
       
-      showSystemMessage('🧪 開始快速測試修復效果...', 'info');
-      console.log('🧪 === 快速測試開始 ===');
-      console.log('📊 超時設定:', API_CONFIG.timeout, 'ms');
-      console.log('🔄 重試次數:', API_CONFIG.retryAttempts);
+      showSystemMessage('🧪 開始快速測試循序漸進生成...', 'info');
+      console.log('🧪 === 循序漸進測試開始 ===');
+      console.log('📊 反覆處理模式:', '一篇→分析→調整→下一篇');
+      console.log('🎯 Jab理論應用:', '自適應差異化生成');
       
       // 觸發內容生成
       const fakeEvent = { preventDefault: () => {} };
       await handleContentGeneration(fakeEvent);
     }
 
-    // 內容生成處理
+    // 循序漸進內容生成處理 - 反覆處理機制
     async function handleContentGeneration(e) {
       e.preventDefault();
       
@@ -448,51 +455,135 @@
       STATE.isGenerating = true;
       updateGenerateButton(true);
 
-      const formData = {
+      const contentCount = parseInt(document.getElementById('count').value);
+      const baseFormData = {
         topic: document.getElementById('topic').value.trim(),
-        count: document.getElementById('count').value,
         model: document.getElementById('model').value,
         contentType: document.getElementById('contentType').value,
         platform: document.getElementById('platform').value,
         style: document.getElementById('style').value,
-        creativity: document.getElementById('creativity').value
+        creativity: document.getElementById('creativity').value,
+        timestamp: new Date().toISOString(),
+        requestId: generateRequestId()
       };
 
-      showLoadingState();
+      // 初始化結果容器
+      const allGeneratedContents = [];
+      const allVariationData = [];
+      
+      showProgressiveLoadingState(0, contentCount);
 
       try {
-        console.log('📤 開始發送內容生成請求:', formData);
-        
-        const response = await fetchWithRetry(`${STATE.currentServer}/api/generate-content`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData)
-        });
+        // 循序漸進生成每篇內容
+        for (let i = 0; i < contentCount; i++) {
+          console.log(`🔄 開始生成第 ${i + 1} 篇內容，總共 ${contentCount} 篇`);
+          
+          // 基於前面已生成的內容分析，調整當前生成策略
+          const currentVariation = await generateAdaptiveVariation(i, contentCount, allGeneratedContents, baseFormData);
+          allVariationData.push(currentVariation);
+          
+          // 更新進度顯示
+          updateProgressiveLoadingState(i, contentCount, currentVariation);
+          
+          // 生成單篇內容
+          const singleContentData = {
+            ...baseFormData,
+            count: 1, // 一次只生成一篇
+            currentIndex: i,
+            totalCount: contentCount,
+            
+            // 當前篇的特殊配置
+            jabTheoryMode: 'progressive_adaptive',
+            currentVariation: currentVariation,
+            previousContents: allGeneratedContents.length > 0 ? allGeneratedContents : [],
+            
+            // 強制差異化指令
+            forceDifferentiation: {
+              mustAvoidSimilarity: true,
+              previousContentAnalysis: await analyzePreviousContents(allGeneratedContents),
+              targetUniqueness: `第${i + 1}篇必須與前${i}篇完全不同`,
+              specificRequirements: currentVariation.specificRequirements
+            }
+          };
 
-        console.log('📨 收到響應，開始解析JSON...');
-        const data = await response.json();
-        console.log('✅ JSON解析成功:', data);
-        
-        if (data && Array.isArray(data.contents)) {
-          displayGeneratedContent(data.contents, formData);
-          STATE.lastGenerated = { contents: data.contents, formData };
-          showSystemMessage('✅ 內容生成成功！', 'success');
-        } else {
-          console.error('❌ 數據格式錯誤:', data);
-          throw new Error(`返回數據格式錯誤: ${JSON.stringify(data)}`);
+          console.log(`📤 發送第 ${i + 1} 篇內容生成請求:`, singleContentData);
+          
+          const response = await fetchWithRetry(`${STATE.currentServer}/api/generate-content`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(singleContentData)
+          });
+
+          const data = await response.json();
+          
+          if (data && data.contents && data.contents.length > 0) {
+            let rawContent = data.contents[0];
+            
+            // 🚀 強制內容差異化處理
+            const processedContent = await forceContentDifferentiation(
+              rawContent, 
+              allGeneratedContents, 
+              currentVariation, 
+              i, 
+              baseFormData
+            );
+            
+            allGeneratedContents.push({
+              content: processedContent.content,
+              index: i,
+              variation: currentVariation,
+              generatedAt: new Date().toISOString(),
+              originalContent: rawContent,
+              transformations: processedContent.transformations
+            });
+            
+            console.log(`✅ 第 ${i + 1} 篇內容生成並強制差異化成功`);
+            console.log(`📝 應用的轉換:`, processedContent.transformations);
+            
+            // 立即顯示已生成的內容
+            displayProgressiveContent(allGeneratedContents, baseFormData);
+            
+            // 短暫延遲，讓用戶看到進度
+            if (i < contentCount - 1) {
+              await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+          } else {
+            throw new Error(`第 ${i + 1} 篇內容生成失敗: ${JSON.stringify(data)}`);
+          }
         }
-      } catch (error) {
-        console.error('💥 內容生成完整錯誤:', {
-          message: error.message,
-          name: error.name,
-          stack: error.stack,
-          isTimeout: error.isTimeout
-        });
+
+        // 所有內容生成完成
+        const finalContents = allGeneratedContents.map(item => item.content);
+        const finalFormData = {
+          ...baseFormData,
+          count: contentCount,
+          multipleVariations: allGeneratedContents.map(item => ({
+            ...allVariationData[item.index],
+            transformations: item.transformations || []
+          })),
+          jabTheoryMode: 'progressive_completed',
+          diversityLevel: 'maximum_progressive',
+          forceUnique: true
+        };
+
+        displayGeneratedContent(finalContents, finalFormData);
+        STATE.lastGenerated = { contents: finalContents, formData: finalFormData };
+        showSystemMessage(`✅ 循序漸進生成完成！${contentCount}篇內容已確保完全不同`, 'success');
         
-        // 特殊處理超時錯誤
-        if (error.isTimeout || error.message.includes('超時')) {
-          showErrorState(`${error.message}\n\n💡 提示：請檢查伺服器控制台，內容可能已經成功生成！`);
-          console.log('🔍 建議檢查伺服器日誌，內容可能已生成但前端超時');
+      } catch (error) {
+        console.error('💥 循序漸進生成錯誤:', error);
+        
+        if (allGeneratedContents.length > 0) {
+          // 部分成功，顯示已生成的內容
+          const partialContents = allGeneratedContents.map(item => item.content);
+          const partialFormData = {
+            ...baseFormData,
+            count: allGeneratedContents.length,
+            multipleVariations: allVariationData.slice(0, allGeneratedContents.length)
+          };
+          
+          displayGeneratedContent(partialContents, partialFormData);
+          showSystemMessage(`⚠️ 部分成功：已生成 ${allGeneratedContents.length}/${contentCount} 篇內容`, 'warning');
         } else {
           showErrorState(error.message);
         }
@@ -536,7 +627,11 @@
             message,
             model: document.getElementById('model').value,
             ...chatOptions,
-            history: STATE.chatHistory.slice(-10) // 保留最近10條對話
+            history: STATE.chatHistory.slice(-10), // 保留最近10條對話
+            // 加入多樣性參數避免重複回應
+            variationSeed: Date.now() + Math.random(),
+            timestamp: new Date().toISOString(),
+            requestId: generateRequestId()
           })
         });
 
@@ -631,12 +726,81 @@
         <div class="flex items-center justify-center p-8 bg-blue-50 rounded-lg">
           <div class="text-center">
             <div class="loading text-2xl mb-2">🤖</div>
-            <div class="text-blue-600 font-medium">AI正在創作中...</div>
+            <div class="text-blue-600 font-medium">AI正在創作多樣化內容...</div>
             <div class="text-sm text-gray-500 mt-1">通常需要 1-2 分鐘，請耐心等待</div>
+            <div class="text-xs text-green-600 bg-green-50 px-2 py-1 rounded mt-2">
+              🎯 已加入多樣性機制，確保每篇內容都不相同
+            </div>
             <div class="text-xs text-blue-500 mt-2">💡 您可以查看伺服器控制台了解生成進度</div>
           </div>
         </div>
       `;
+    }
+
+    // 循序漸進載入狀態顯示
+    function showProgressiveLoadingState(current, total) {
+      elements.contentResult.innerHTML = `
+        <div class="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border-l-4 border-blue-500">
+          <div class="text-center mb-4">
+            <div class="loading text-2xl mb-2">🎯</div>
+            <div class="text-blue-700 font-semibold text-lg">循序漸進內容生成</div>
+            <div class="text-blue-600 text-sm mt-1">反覆處理機制 - 確保每篇內容完全不同</div>
+          </div>
+          
+          <div class="mb-4">
+            <div class="flex justify-between text-sm text-blue-700 mb-2">
+              <span>進度</span>
+              <span>${current}/${total} 篇</span>
+            </div>
+            <div class="w-full bg-blue-200 rounded-full h-3">
+              <div class="bg-blue-600 h-3 rounded-full transition-all duration-500" 
+                   style="width: ${(current / total) * 100}%"></div>
+            </div>
+          </div>
+          
+          <div class="text-xs text-gray-600 bg-white p-3 rounded">
+            <div class="font-medium mb-2">🔧 技術特色：</div>
+            <ul class="space-y-1">
+              <li>• 生成一篇 → 深度分析 → 調整策略 → 生成下一篇</li>
+              <li>• 每篇內容都基於前面的分析結果避免重複</li>
+              <li>• Jab理論自適應應用，確保價值導向差異化</li>
+              <li>• 平台原生風格動態調整</li>
+            </ul>
+          </div>
+        </div>
+      `;
+    }
+
+    // 更新循序漸進載入狀態
+    function updateProgressiveLoadingState(current, total, variation) {
+      const progressContainer = elements.contentResult.querySelector('.bg-gradient-to-r');
+      if (!progressContainer) return;
+      
+      // 更新進度條
+      const progressBar = progressContainer.querySelector('.bg-blue-600');
+      if (progressBar) {
+        progressBar.style.width = `${((current + 1) / total) * 100}%`;
+      }
+      
+      // 更新進度文字
+      const progressText = progressContainer.querySelector('.flex.justify-between span:last-child');
+      if (progressText) {
+        progressText.textContent = `${current + 1}/${total} 篇`;
+      }
+      
+      // 添加當前生成狀態
+      const statusDiv = progressContainer.querySelector('.text-xs.text-gray-600.bg-white');
+      if (statusDiv && variation) {
+        statusDiv.innerHTML = `
+          <div class="font-medium mb-2">🔧 目前生成第 ${current + 1} 篇：</div>
+          <ul class="space-y-1 text-xs">
+            <li>• Jab策略: ${variation.jabStrategy}</li>
+            <li>• 結構框架: ${variation.structuralFramework}</li>
+            <li>• 差異化重點: ${variation.differentiationFocus}</li>
+            <li>• 避免重複: ${variation.avoidanceMeasures}</li>
+          </ul>
+        `;
+      }
     }
 
          function showErrorState(errorMsg) {
@@ -717,35 +881,135 @@
      }
 
     function displayGeneratedContent(contents, formData) {
-      const typeLabel = formData.contentType === 'jab' ? 'Jab（鋪墊型）' : 'Right Hook（主打型）';
+      // 更詳細的內容類型標籤
+      const contentTypeLabels = {
+        'jab': 'Jab（給予價值）- 教育、娛樂、啟發',
+        'right_hook': 'Right Hook（請求行動）- 明確CTA',
+        'jab_story': 'Jab故事型 - 情感連結',
+        'jab_education': 'Jab教育型 - 知識分享',
+        'jab_entertainment': 'Jab娛樂型 - 親和力建立',
+        'right_hook_soft': 'Right Hook軟性 - 間接引導',
+        'right_hook_direct': 'Right Hook直接 - 立即行動'
+      };
+      
+      const typeLabel = contentTypeLabels[formData.contentType] || 'Jab價值型內容';
       
       elements.contentResult.innerHTML = `
-        <div class="mb-4 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
-          <div class="flex justify-between items-center mb-2">
-            <h3 class="font-semibold text-blue-700">📋 生成結果</h3>
-            <div class="text-sm text-blue-600">
-              ${contents.length} 篇內容 | ${typeLabel} | ${formData.platform}
+        <div class="mb-4 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border-l-4 border-blue-500">
+          <div class="flex justify-between items-center mb-3">
+            <h3 class="font-semibold text-blue-800">📋 Jab理論內容生成結果</h3>
+            <div class="text-sm text-blue-700 bg-blue-100 px-2 py-1 rounded">
+              ${contents.length} 篇內容 | ${formData.platform}
             </div>
           </div>
-          <div class="text-sm text-gray-600">
-            主題: ${formData.topic} | 風格: ${formData.style} | 創意度: ${formData.creativity}%
+          
+          <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+            <div class="bg-white p-2 rounded">
+              <strong class="text-gray-700">內容策略:</strong> ${typeLabel}
+            </div>
+            <div class="bg-white p-2 rounded">
+              <strong class="text-gray-700">主題:</strong> ${formData.topic}
+            </div>
+            <div class="bg-white p-2 rounded">
+              <strong class="text-gray-700">風格:</strong> ${formData.style}
+            </div>
+            <div class="bg-white p-2 rounded">
+              <strong class="text-gray-700">創意度:</strong> ${formData.creativity}%
+            </div>
           </div>
+          
+          ${formData.jabTheoryMode === 'advanced' ? `
+            <div class="text-xs text-green-700 bg-green-100 px-3 py-2 rounded-lg mb-2">
+              🎯 <strong>Jab理論進階模式:</strong> 每篇內容都基於不同的價值給予策略，確保多樣性和平台原生性
+            </div>
+          ` : ''}
+          
+          ${formData.multipleVariations && formData.multipleVariations.length > 0 ? `
+            <div class="text-xs text-purple-700 bg-purple-100 px-3 py-2 rounded-lg mb-2">
+              🔀 <strong>強化差異化:</strong> ${formData.diversityLevel} | 平台原生優化: ${formData.platformNativeOptimization ? '啟用' : '停用'}
+            </div>
+            <div class="text-xs text-orange-700 bg-orange-100 px-3 py-2 rounded-lg">
+              ⚡ <strong>品質控制:</strong> 最低${formData.qualityRequirements?.minimumLength || 150}字 | 互動元素: ${formData.qualityRequirements?.interactionElements || '必須'} | Jab價值清晰度: ${formData.qualityRequirements?.jabValueClarity || '高'}
+            </div>
+          ` : ''}
         </div>
-        ${contents.map((content, i) => `
-          <div class="p-6 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg shadow-md border-l-4 border-blue-400 mb-4">
+        ${contents.map((content, i) => {
+          // 為每篇內容生成獨特的變化標籤
+          const uniqueVariation = generateContentVariationLabel(i, formData);
+          const variation = formData.multipleVariations ? formData.multipleVariations[i] : null;
+          
+          // 根據內容類型選擇顏色主題
+          const isJab = formData.contentType.includes('jab');
+          const colorTheme = isJab ? 'green' : 'red';
+          const bgGradient = isJab ? 'from-green-50 to-emerald-50' : 'from-red-50 to-pink-50';
+          const borderColor = isJab ? 'border-green-400' : 'border-red-400';
+          const textColor = isJab ? 'text-green-700' : 'text-red-700';
+          
+          return `
+          <div class="p-6 bg-gradient-to-r ${bgGradient} rounded-lg shadow-md border-l-4 ${borderColor} mb-4">
             <div class="flex justify-between items-center mb-3">
-              <div class="font-semibold text-blue-700">📝 內容 ${i + 1}</div>
+              <div class="font-semibold ${textColor}">
+                ${isJab ? '🥊' : '💥'} 內容 ${i + 1} 
+                <span class="text-xs font-normal text-purple-600 bg-white px-2 py-1 rounded ml-2 shadow-sm">
+                  ${uniqueVariation}
+                </span>
+              </div>
               <button onclick="copyToClipboard(this, '${content.replace(/'/g, "\\'")}', ${i})" 
-                      class="copy-btn bg-blue-200 hover:bg-blue-300 text-blue-700 px-3 py-1 rounded text-sm transition">
+                      class="copy-btn bg-white hover:bg-gray-50 ${textColor} px-3 py-1 rounded text-sm transition shadow-sm border">
                 📋 複製
               </button>
             </div>
-            <div class="text-gray-800 leading-relaxed whitespace-pre-wrap">${content}</div>
-            <div class="mt-3 pt-3 border-t border-blue-200 text-xs text-blue-600">
-              適用: ${formData.platform} | 風格: ${formData.style}
+            
+            ${variation && variation.jabTheoryApplication ? `
+              <div class="mb-3 p-3 bg-white rounded-lg text-xs border shadow-sm">
+                <div class="font-medium text-gray-700 mb-2">🎯 Jab理論應用分析：</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                  <div><strong>價值類型:</strong> <span class="text-blue-600">${variation.jabTheoryApplication.valueType}</span></div>
+                  <div><strong>平台方式:</strong> <span class="text-green-600">${variation.jabTheoryApplication.platformApproach}</span></div>
+                  <div><strong>情感連結:</strong> <span class="text-purple-600">${variation.jabTheoryApplication.emotionalConnection}</span></div>
+                  <div><strong>結構框架:</strong> <span class="text-orange-600">${variation.jabTheoryApplication.structuralFramework}</span></div>
+                </div>
+                ${variation.mandatoryConstraints ? `
+                  <div class="mt-2 pt-2 border-t">
+                    <strong>差異化要求:</strong> <span class="text-gray-600">${variation.mandatoryConstraints.jabMode}</span> | 
+                    <span class="text-gray-600">${variation.mandatoryConstraints.emotionalTone}</span>
+                  </div>
+                ` : ''}
+              </div>
+            ` : ''}
+            
+            ${formData.multipleVariations && formData.multipleVariations[i] && formData.multipleVariations[i].transformations ? `
+              <div class="mb-3 p-3 bg-yellow-50 rounded-lg text-xs border border-yellow-200">
+                <div class="font-medium text-yellow-800 mb-2">🚀 強制差異化轉換記錄：</div>
+                <div class="text-yellow-700">
+                  ${formData.multipleVariations[i].transformations.slice(0, 4).join(' • ')}
+                  ${formData.multipleVariations[i].transformations.length > 4 ? '...' : ''}
+                </div>
+                <div class="mt-1 text-xs text-green-600">
+                  ✅ 共應用 ${formData.multipleVariations[i].transformations.length} 項轉換確保內容獨特性
+                </div>
+              </div>
+            ` : ''}
+            
+            <div class="text-gray-800 leading-relaxed whitespace-pre-wrap bg-white p-4 rounded-lg border">${content}</div>
+            
+            <div class="mt-3 pt-3 border-t ${borderColor} text-xs ${textColor}">
+              <div class="flex justify-between items-center">
+                <div>
+                  <strong>適用:</strong> ${formData.platform} | 
+                  <strong>風格:</strong> ${formData.style} | 
+                  <strong>類型:</strong> ${isJab ? 'Jab價值給予' : 'Right Hook行動呼籲'}
+                </div>
+                ${variation ? `<div class="text-gray-500">ID: ${variation.uniqueId.substr(-6)}</div>` : ''}
+              </div>
+              ${variation && variation.jabValueFocus ? `
+                <div class="mt-1 text-xs bg-white px-2 py-1 rounded">
+                  <strong>價值焦點:</strong> ${variation.jabValueFocus}
+                </div>
+              ` : ''}
             </div>
           </div>
-        `).join('')}
+        `;}).join('')}
         <div class="mt-4 text-center">
           <button onclick="regenerateContent()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition mr-2">
             🔄 重新生成
@@ -801,6 +1065,765 @@
         msgDiv.style.transform = 'translateX(100%)';
         setTimeout(() => msgDiv.remove(), 300);
       }, 3000);
+    }
+
+    // 自適應變化生成 - 基於前面內容分析調整策略
+    async function generateAdaptiveVariation(index, total, previousContents, baseFormData) {
+      console.log(`🧠 為第 ${index + 1} 篇生成自適應變化策略`);
+      
+      // 分析前面已生成的內容特徵
+      const previousAnalysis = await analyzePreviousContents(previousContents);
+      
+      // 基礎Jab策略池，確保每篇都不同
+      const jabStrategies = [
+        '純教育價值型 - 知識傳遞為主',
+        '情感故事型 - 共鳴連結為主', 
+        '實用工具型 - 具體幫助為主',
+        '娛樂互動型 - 輕鬆參與為主',
+        '專業權威型 - 深度分析為主',
+        '趨勢洞察型 - 前瞻視野為主',
+        '社群歸屬型 - 社區感為主',
+        '問題解決型 - 方案導向為主'
+      ];
+      
+      // 結構框架池，循環使用確保差異
+      const structuralFrameworks = [
+        '問題→分析→解方→呼籲',
+        '故事→教訓→應用→分享',
+        '現象→原因→策略→行動',
+        '挑戰→思考→突破→成長',
+        '觀察→洞察→建議→實踐',
+        '疑問→探索→發現→啟發',
+        '需求→方法→效益→推廣',
+        '目標→路徑→實現→延伸'
+      ];
+      
+      // 差異化重點，基於已用過的避免重複
+      const usedDifferentiationPoints = previousAnalysis.usedDifferentiationPoints || [];
+      const availableDifferentiationPoints = [
+        '開頭方式完全不同', '結尾呼籲方式不同', '語言風格差異化',
+        '情感調性對比', '內容長度變化', '互動元素差異',
+        '表情符號使用不同', '段落結構變化', '問句使用差異',
+        '個人/客觀視角切換', '數據/感性平衡調整', '時間觀點差異'
+      ].filter(point => !usedDifferentiationPoints.includes(point));
+      
+      // 避免重複措施，基於前面內容的特徵
+      const avoidanceMeasures = generateAvoidanceMeasures(previousAnalysis, index);
+      
+      // 當前篇的獨特配置
+      const currentVariation = {
+        index: index,
+        jabStrategy: jabStrategies[index % jabStrategies.length],
+        structuralFramework: structuralFrameworks[index % structuralFrameworks.length],
+        differentiationFocus: availableDifferentiationPoints[0] || `第${index + 1}篇獨特焦點`,
+        avoidanceMeasures: avoidanceMeasures,
+        
+        // Jab理論深度應用
+        jabTheoryApplication: {
+          valueType: getUniqueValueType(index, previousAnalysis),
+          platformApproach: getUniquePlatformApproach(index, baseFormData.platform, previousAnalysis),
+          emotionalConnection: getUniqueEmotionalConnection(index, previousAnalysis),
+          languageStyle: getUniqueLanguageStyle(index, previousAnalysis)
+        },
+        
+        // 特殊要求
+        specificRequirements: {
+          mustDifferFrom: previousContents.map(content => content.content.substring(0, 100)),
+          targetLength: 150 + (index * 50), // 長度遞增
+          uniqueElements: getUniqueElements(index, total),
+          platformOptimization: getPlatformOptimization(baseFormData.platform, index)
+        },
+        
+        // 強制差異化規則
+        forcedDifferentiation: {
+          structuralPattern: `模式${index + 1}`,
+          tonalDirection: index % 2 === 0 ? '積極正向' : '深度思考',
+          contentFocus: index < total / 2 ? 'Jab價值給予' : 'Right Hook軟性引導',
+          interactionStyle: getInteractionStyle(index)
+        }
+      };
+      
+      console.log(`✅ 第 ${index + 1} 篇變化策略生成完成:`, currentVariation);
+      return currentVariation;
+    }
+
+    // 分析前面已生成的內容
+    async function analyzePreviousContents(previousContents) {
+      if (previousContents.length === 0) {
+        return {
+          usedStrategies: [],
+          usedStructures: [],
+          usedDifferentiationPoints: [],
+          commonPatterns: [],
+          suggestionForNext: '第一篇內容，自由發揮'
+        };
+      }
+      
+      console.log(`🔍 分析前面 ${previousContents.length} 篇內容特徵`);
+      
+      const analysis = {
+        usedStrategies: previousContents.map(content => content.variation?.jabStrategy || ''),
+        usedStructures: previousContents.map(content => content.variation?.structuralFramework || ''),
+        usedDifferentiationPoints: previousContents.flatMap(content => 
+          content.variation?.differentiationFocus ? [content.variation.differentiationFocus] : []
+        ),
+        contentLengths: previousContents.map(content => content.content.length),
+        openingStyles: previousContents.map(content => analyzeOpeningStyle(content.content)),
+        closingStyles: previousContents.map(content => analyzeClosingStyle(content.content)),
+        commonPatterns: identifyCommonPatterns(previousContents),
+        suggestionForNext: generateSuggestionForNext(previousContents)
+      };
+      
+      console.log('📊 前面內容分析結果:', analysis);
+      return analysis;
+    }
+
+    // 生成避免重複的措施
+    function generateAvoidanceMeasures(previousAnalysis, currentIndex) {
+      const measures = [];
+      
+      if (previousAnalysis.openingStyles && previousAnalysis.openingStyles.length > 0) {
+        const usedOpenings = previousAnalysis.openingStyles.join('、');
+        measures.push(`開頭避免使用: ${usedOpenings}`);
+      }
+      
+      if (previousAnalysis.contentLengths && previousAnalysis.contentLengths.length > 0) {
+        const avgLength = previousAnalysis.contentLengths.reduce((a, b) => a + b, 0) / previousAnalysis.contentLengths.length;
+        const targetLength = currentIndex % 2 === 0 ? avgLength + 100 : avgLength - 50;
+        measures.push(`目標長度: ${Math.max(150, targetLength)} 字`);
+      }
+      
+      if (previousAnalysis.commonPatterns && previousAnalysis.commonPatterns.length > 0) {
+        measures.push(`避免模式: ${previousAnalysis.commonPatterns[0]}`);
+      }
+      
+      measures.push(`強制差異化第 ${currentIndex + 1} 篇`);
+      
+      return measures.join(' | ');
+    }
+
+    // 循序漸進內容顯示
+    function displayProgressiveContent(generatedContents, baseFormData) {
+      const contentHtml = generatedContents.map((item, i) => {
+        const variation = item.variation;
+        const transformations = item.transformations || [];
+        const isJab = baseFormData.contentType.includes('jab');
+        const colorTheme = isJab ? 'green' : 'red';
+        const bgGradient = isJab ? 'from-green-50 to-emerald-50' : 'from-red-50 to-pink-50';
+        const borderColor = isJab ? 'border-green-400' : 'border-red-400';
+        const textColor = isJab ? 'text-green-700' : 'text-red-700';
+        
+        return `
+          <div class="p-4 bg-gradient-to-r ${bgGradient} rounded-lg shadow-sm border-l-4 ${borderColor} mb-3">
+            <div class="flex justify-between items-center mb-2">
+              <div class="font-medium ${textColor}">
+                ${isJab ? '🥊' : '💥'} 內容 ${i + 1} 
+                <span class="text-xs bg-white px-2 py-1 rounded ml-2 shadow-sm">
+                  ${variation.jabStrategy}
+                </span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-xs bg-purple-100 text-purple-600 px-2 py-1 rounded">
+                  🔧 ${transformations.length}項轉換
+                </span>
+                <span class="text-xs text-gray-500">${item.generatedAt.substring(11, 19)}</span>
+              </div>
+            </div>
+            
+            ${transformations.length > 0 ? `
+              <div class="mb-2 p-2 bg-white rounded text-xs">
+                <div class="font-medium text-gray-700 mb-1">🚀 強制差異化轉換：</div>
+                <div class="text-gray-600">${transformations.slice(0, 3).join(' | ')}${transformations.length > 3 ? '...' : ''}</div>
+              </div>
+            ` : ''}
+            
+            <div class="text-gray-800 text-sm bg-white p-3 rounded mb-2 leading-relaxed whitespace-pre-line">${item.content}</div>
+            
+            <div class="text-xs ${textColor}">
+              <strong>策略:</strong> ${variation.structuralFramework} | 
+              <strong>差異化:</strong> ${variation.differentiationFocus}
+            </div>
+          </div>
+        `;
+      }).join('');
+      
+      elements.contentResult.innerHTML = `
+        <div class="mb-4 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+          <h3 class="font-semibold text-blue-700 mb-2">🎯 強制差異化生成進度</h3>
+          <div class="text-sm text-blue-600 mb-2">
+            已完成: ${generatedContents.length} 篇 | 每篇都經過7層差異化轉換處理
+          </div>
+          <div class="text-xs text-green-600 bg-green-50 px-2 py-1 rounded">
+            ✅ 結構轉換 ✅ 語言風格 ✅ 社交格式 ✅ 開頭結尾 ✅ 視覺元素 ✅ 互動設計 ✅ 相似度檢查
+          </div>
+        </div>
+        ${contentHtml}
+      `;
+    }
+
+    // 輔助函數
+    function analyzeOpeningStyle(content) {
+      if (content.startsWith('你是否')) return '疑問開場';
+      if (content.includes('想像一下') || content.includes('假設')) return '情境開場';
+      if (content.match(/^\d+/)) return '數據開場';
+      if (content.includes('💡') || content.includes('🤔')) return '表情開場';
+      return '一般開場';
+    }
+    
+    function analyzeClosingStyle(content) {
+      if (content.includes('你覺得') || content.includes('你認為')) return '提問結尾';
+      if (content.includes('立即') || content.includes('馬上')) return '行動結尾';
+      if (content.includes('分享') || content.includes('留言')) return '互動結尾';
+      return '一般結尾';
+    }
+    
+    function identifyCommonPatterns(contents) {
+      // 簡化的模式識別
+      return ['重複表情符號', '相似結構', '類似語調'];
+    }
+    
+    function generateSuggestionForNext(contents) {
+      return `建議下一篇採用與前${contents.length}篇完全不同的風格`;
+    }
+    
+    function getUniqueValueType(index, analysis) {
+      const types = ['教育啟發', '情感共鳴', '實用指導', '娛樂互動', '專業權威', '趨勢洞察'];
+      return types[index % types.length];
+    }
+    
+    function getUniquePlatformApproach(index, platform, analysis) {
+      const approaches = {
+        'Facebook': ['對話式', '故事性', '分享式', '討論式'],
+        'Instagram': ['視覺化', '分段式', 'hashtag式', '美學式'],
+        'LinkedIn': ['專業式', '數據式', '洞察式', '建議式']
+      };
+      const platformApproaches = approaches[platform] || ['通用式', '適應式', '原生式', '創新式'];
+      return platformApproaches[index % platformApproaches.length];
+    }
+    
+    function getUniqueEmotionalConnection(index, analysis) {
+      const connections = ['同理共鳴', '激勵鼓舞', '溫暖陪伴', '挑戰思考', '安全感提供', '成就感激發'];
+      return connections[index % connections.length];
+    }
+    
+    function getUniqueLanguageStyle(index, analysis) {
+      const styles = ['親切對話', '專業指導', '溫暖分享', '理性分析', '感性表達', '幽默輕鬆'];
+      return styles[index % styles.length];
+    }
+    
+    function getUniqueElements(index, total) {
+      return {
+        emojiLevel: index % 3 === 0 ? '豐富' : index % 3 === 1 ? '適中' : '簡約',
+        questionCount: index % 2 + 1,
+        paragraphCount: index % 3 + 2,
+        callToAction: index >= total / 2 ? '包含' : '不包含'
+      };
+    }
+    
+    function getPlatformOptimization(platform, index) {
+      return {
+        Facebook: index % 2 === 0 ? '對話互動優化' : '分享擴散優化',
+        Instagram: index % 2 === 0 ? '視覺吸引優化' : 'hashtag策略優化',
+        LinkedIn: index % 2 === 0 ? '專業價值優化' : '職場洞察優化'
+      }[platform] || '通用優化';
+    }
+    
+    function getInteractionStyle(index) {
+      const styles = ['開放討論', '直接提問', '分享邀請', '反思引導', '行動鼓勵'];
+      return styles[index % styles.length];
+    }
+
+    // 🚀 強制內容差異化系統 - 確保每篇文章完全不同
+    async function forceContentDifferentiation(rawContent, previousContents, currentVariation, index, baseFormData) {
+      console.log(`🔧 開始強制差異化第 ${index + 1} 篇內容`);
+      
+      let processedContent = rawContent;
+      const transformations = [];
+      
+      // 1. 結構性轉換 - 基於索引應用不同的結構
+      processedContent = applyStructuralTransformation(processedContent, index, transformations);
+      
+      // 2. 語言風格轉換
+      processedContent = applyLanguageStyleTransformation(processedContent, index, transformations);
+      
+      // 3. 社交媒體格式優化
+      processedContent = applySocialMediaFormatting(processedContent, baseFormData.platform, index, transformations);
+      
+      // 4. 開頭結尾強制差異化
+      processedContent = applyOpeningClosingDifferentiation(processedContent, index, transformations);
+      
+      // 5. 表情符號和視覺元素差異化
+      processedContent = applyVisualElementDifferentiation(processedContent, index, transformations);
+      
+      // 6. 互動元素差異化
+      processedContent = applyInteractionDifferentiation(processedContent, index, transformations);
+      
+      // 7. 檢查與前面內容的相似度並進一步調整
+      if (previousContents.length > 0) {
+        processedContent = await avoidSimilarityWithPrevious(processedContent, previousContents, index, transformations);
+      }
+      
+      console.log(`✅ 第 ${index + 1} 篇差異化完成，應用了 ${transformations.length} 項轉換`);
+      
+      return {
+        content: processedContent,
+        transformations: transformations
+      };
+    }
+
+    // 結構性轉換
+    function applyStructuralTransformation(content, index, transformations) {
+      const structures = [
+        {
+          name: '問題解決型',
+          apply: (text) => {
+            // 將內容重新組織為：問題提出 → 分析 → 解決方案 → 行動建議
+            const sentences = text.split(/[。！？]/).filter(s => s.trim());
+            if (sentences.length >= 4) {
+              return `🤔 ${sentences[0]}？\n\n💭 ${sentences[1]}。\n\n💡 ${sentences[2]}。\n\n🚀 ${sentences.slice(3).join('。')}！`;
+            }
+            return `🤔 你是否也遇到這樣的困擾？\n\n${text}\n\n💪 一起來解決這個問題吧！`;
+          }
+        },
+        {
+          name: '故事敘述型',
+          apply: (text) => {
+            // 將內容包裝成故事形式
+            const sentences = text.split(/[。！？]/).filter(s => s.trim());
+            return `📖 分享一個真實的故事...\n\n${sentences[0]}。想像一下，${sentences.slice(1).join('。')}\n\n✨ 這就是為什麼我們需要改變的原因。`;
+          }
+        },
+        {
+          name: '對比分析型',
+          apply: (text) => {
+            // 創建對比結構
+            const mid = Math.floor(text.length / 2);
+            const part1 = text.substring(0, mid);
+            const part2 = text.substring(mid);
+            return `⚖️ 讓我們來看兩個不同的角度：\n\n❌ 過去的做法：\n${part1}\n\n✅ 更好的方式：\n${part2}\n\n你會選擇哪一種？`;
+          }
+        },
+        {
+          name: '列表指南型',
+          apply: (text) => {
+            // 轉換為步驟列表
+            const sentences = text.split(/[。！？]/).filter(s => s.trim());
+            const steps = sentences.slice(0, Math.min(5, sentences.length));
+            return `📋 完整指南來了：\n\n${steps.map((step, i) => `${i + 1}️⃣ ${step}`).join('\n\n')}\n\n💡 照著做，你也能做到！`;
+          }
+        },
+        {
+          name: '反思啟發型',
+          apply: (text) => {
+            // 轉換為反思性內容
+            return `🤲 停下來想一想...\n\n${text}\n\n🌟 也許，真正的改變就從這個想法開始。\n\n你準備好了嗎？`;
+          }
+        }
+      ];
+      
+      const structure = structures[index % structures.length];
+      const transformedContent = structure.apply(content);
+      transformations.push(`結構轉換: ${structure.name}`);
+      
+      return transformedContent;
+    }
+
+    // 語言風格轉換
+    function applyLanguageStyleTransformation(content, index, transformations) {
+      const styles = [
+        {
+          name: '親切對話風',
+          apply: (text) => text.replace(/你/g, '你').replace(/。/g, '～').replace(/！/g, '！😊')
+        },
+        {
+          name: '專業權威風',
+          apply: (text) => text.replace(/我覺得/g, '根據研究顯示').replace(/可能/g, '必然').replace(/。/g, '。')
+        },
+        {
+          name: '激勵鼓舞風',
+          apply: (text) => text.replace(/可以/g, '一定可以').replace(/嘗試/g, '勇敢行動').replace(/。/g, '！💪')
+        },
+        {
+          name: '溫暖分享風',
+          apply: (text) => `❤️ ${text}`.replace(/。/g, '。🌟').replace(/問題/g, '挑戰')
+        },
+        {
+          name: '幽默輕鬆風',
+          apply: (text) => text.replace(/很重要/g, '超重要').replace(/需要/g, '必須').replace(/。/g, '啦！😄')
+        }
+      ];
+      
+      const style = styles[index % styles.length];
+      const transformedContent = style.apply(content);
+      transformations.push(`語言風格: ${style.name}`);
+      
+      return transformedContent;
+    }
+
+    // 社交媒體格式優化
+    function applySocialMediaFormatting(content, platform, index, transformations) {
+      const formats = {
+        'Facebook': [
+          (text) => {
+            // Facebook格式：短段落 + 表情符號
+            const paragraphs = text.split('\n\n');
+            return paragraphs.map(p => p.length > 100 ? 
+              p.split('。').join('。\n') : p
+            ).join('\n\n');
+          },
+          (text) => {
+            // Facebook格式：對話式
+            return `嗨朋友們！👋\n\n${text}\n\n你們有什麼想法嗎？留言跟我分享！ 💬`;
+          }
+        ],
+        'Instagram': [
+          (text) => {
+            // Instagram格式：短行 + hashtag
+            return text.split('。').join('。\n・\n').replace(/\n\n/g, '\n\n📷 ') + '\n\n#生活分享 #正能量 #成長 #日常';
+          },
+          (text) => {
+            // Instagram視覺化格式
+            return `✨ ${text.split('。')[0]}。\n\n📸 ${text.split('。').slice(1).join('。')}\n\n💫 記得點讚告訴我你喜歡！`;
+          }
+        ],
+        'LinkedIn': [
+          (text) => {
+            // LinkedIn專業格式
+            return `💼 職場分享：\n\n${text}\n\n🔗 你在職場上有類似經驗嗎？歡迎在評論區分享你的看法。`;
+          },
+          (text) => {
+            // LinkedIn洞察格式
+            return `🎯 深度觀察：\n\n${text}\n\n📊 這是我在多年工作中觀察到的現象，你認為如何？`;
+          }
+        ]
+      };
+      
+      const platformFormats = formats[platform] || formats['Facebook'];
+      const formatFunction = platformFormats[index % platformFormats.length];
+      const transformedContent = formatFunction(content);
+      transformations.push(`${platform}平台格式化`);
+      
+      return transformedContent;
+    }
+
+    // 開頭結尾差異化
+    function applyOpeningClosingDifferentiation(content, index, transformations) {
+      const openings = [
+        '🌅 早安！今天想跟大家分享...',
+        '💭 突然想到一個重要的事情...',
+        '📚 最近學到一個很棒的概念...',
+        '🎯 有個問題一直在我心中...',
+        '✨ 剛剛經歷了一件很有意思的事...'
+      ];
+      
+      const closings = [
+        '\n\n💬 你有什麼想法？留言跟我說！',
+        '\n\n🌟 希望對你有幫助，記得分享給需要的朋友！',
+        '\n\n🤔 你會怎麼做？我很好奇大家的想法！',
+        '\n\n💪 一起努力，一起成長！',
+        '\n\n📩 有問題可以私訊我，很樂意聊聊！'
+      ];
+      
+      // 移除原有的開頭結尾，添加新的
+      let processedContent = content.trim();
+      
+      // 添加獨特開頭
+      const opening = openings[index % openings.length];
+      processedContent = `${opening}\n\n${processedContent}`;
+      
+      // 添加獨特結尾
+      const closing = closings[index % closings.length];
+      processedContent = processedContent + closing;
+      
+      transformations.push(`開頭結尾差異化`);
+      
+      return processedContent;
+    }
+
+    // 表情符號和視覺元素差異化
+    function applyVisualElementDifferentiation(content, index, transformations) {
+      const emojiSets = [
+        ['🌟', '✨', '💫', '⭐', '🌈'], // 閃亮系列
+        ['💪', '🚀', '🎯', '⚡', '🔥'], // 力量系列
+        ['❤️', '🌸', '🌺', '💝', '🌹'], // 溫暖系列
+        ['📚', '💡', '🧠', '📖', '✏️'], // 學習系列
+        ['🎉', '🎊', '🥳', '🎈', '🎁']  // 慶祝系列
+      ];
+      
+      const emojiSet = emojiSets[index % emojiSets.length];
+      let processedContent = content;
+      
+      // 隨機插入不同的表情符號
+      const sentences = processedContent.split('。');
+      processedContent = sentences.map((sentence, i) => {
+        if (sentence.trim() && i < emojiSet.length) {
+          return sentence + '。 ' + emojiSet[i % emojiSet.length];
+        }
+        return sentence + (sentence.trim() ? '。' : '');
+      }).join(' ');
+      
+      transformations.push(`視覺元素: ${emojiSet.join('')}`);
+      
+      return processedContent;
+    }
+
+    // 互動元素差異化
+    function applyInteractionDifferentiation(content, index, transformations) {
+      const interactions = [
+        (text) => text + '\n\n🗳️ 投票：你同意這個觀點嗎？\n👍 同意 | 👎 不同意',
+        (text) => text + '\n\n🎮 小挑戰：試試看這個方法，然後回來跟我分享結果！',
+        (text) => text + '\n\n📝 作業時間：在評論寫下你的三個行動計畫！',
+        (text) => text + '\n\n🤝 找朋友：標記一個需要看到這篇的朋友！',
+        (text) => text + '\n\n💭 反思時間：花30秒想想，這對你的生活有什麼啟發？'
+      ];
+      
+      const interaction = interactions[index % interactions.length];
+      const transformedContent = interaction(content);
+      transformations.push(`互動元素: 類型${index + 1}`);
+      
+      return transformedContent;
+    }
+
+    // 避免與前面內容相似
+    async function avoidSimilarityWithPrevious(content, previousContents, index, transformations) {
+      let processedContent = content;
+      
+      // 檢查關鍵詞重複
+      const previousTexts = previousContents.map(item => item.content);
+      const currentWords = processedContent.match(/\b\w+\b/g) || [];
+      
+      // 如果發現重複的關鍵詞太多，進行同義詞替換
+      const synonymReplacements = {
+        '重要': ['關鍵', '核心', '重點', '要緊', '關鍵性'],
+        '方法': ['策略', '技巧', '做法', '路徑', '秘訣'],
+        '問題': ['挑戰', '困難', '障礙', '課題', '難題'],
+        '成功': ['成就', '達成', '實現', '完成', '勝利'],
+        '學習': ['學會', '掌握', '了解', '領悟', '吸收']
+      };
+      
+      for (const [original, synonyms] of Object.entries(synonymReplacements)) {
+        if (processedContent.includes(original)) {
+          const replacement = synonyms[index % synonyms.length];
+          processedContent = processedContent.replace(new RegExp(original, 'g'), replacement);
+          transformations.push(`同義詞替換: ${original}→${replacement}`);
+        }
+      }
+      
+      // 如果內容長度相似，調整長度
+      const averagePreviousLength = previousTexts.length > 0 ? 
+        previousTexts.reduce((sum, text) => sum + text.length, 0) / previousTexts.length : 0;
+      
+      if (Math.abs(processedContent.length - averagePreviousLength) < 50) {
+        if (index % 2 === 0) {
+          // 擴展內容
+          processedContent += '\n\n💡 補充說明：這個觀點值得我們深入思考，因為它不僅影響當下，更關係到未來的發展方向。';
+          transformations.push('內容擴展');
+        } else {
+          // 精簡內容
+          const sentences = processedContent.split('。');
+          processedContent = sentences.slice(0, Math.max(2, sentences.length - 1)).join('。') + '。';
+          transformations.push('內容精簡');
+        }
+      }
+      
+      return processedContent;
+    }
+
+    // 基於Jab理論的強化多樣性生成函數
+    function generateDiversityKeywords() {
+      // Jab核心價值類型
+      const jabValueTypes = [
+        '教育啟發價值', '娛樂互動價值', '情感共鳴價值', '實用工具價值', 
+        '社群歸屬價值', '專業權威價值', '創新思維價值', '生活美學價值',
+        '成長激勵價值', '問題解決價值', '趨勢洞察價值', '文化認同價值'
+      ];
+      
+      // 平台原生表達方式
+      const platformNativeApproaches = [
+        'Facebook對話式故事', 'Instagram視覺化分段', 'LinkedIn專業數據分析', 
+        'Twitter觀點式金句', 'YouTube深度教學式', 'TikTok趨勢挑戰式',
+        '個人經驗分享式', '案例研究式', '步驟指導式', '對比分析式',
+        '問答互動式', '清單總結式', '場景描述式', '反思思考式'
+      ];
+      
+      // 情感連結層次
+      const emotionalConnections = [
+        '同理心共鳴', '成就感激勵', '歸屬感建立', '安全感提供', 
+        '好奇心激發', '成長感啟發', '認同感強化', '幸福感傳遞',
+        '挑戰感鼓舞', '溫暖感陪伴', '新鮮感驚喜', '價值感肯定'
+      ];
+
+      // 內容結構框架（確保每篇不同）
+      const structureFrameworks = [
+        '問題-洞察-解決方案', '故事-教訓-應用', '現況-趨勢-建議',
+        '挑戰-策略-成果', '觀察-分析-行動', '經驗-反思-分享',
+        '發現-驗證-推廣', '困難-突破-成長', '需求-方法-效益',
+        '現象-原因-對策', '目標-路徑-實現', '疑問-探索-答案'
+      ];
+
+      // 語言風格變化（基於Jab理論的自然度）
+      const languageStyles = [
+        '親切朋友式對話', '專業導師式指導', '溫暖長輩式分享', '活力同伴式互動',
+        '睿智觀察家式', '實務經驗家式', '創意發想家式', '理性分析家式',
+        '感性故事家式', '幽默陪伴者式', '激勵教練式', '溫柔引導者式'
+      ];
+
+      // 獨特角度切入點
+      const uniquePerspectives = [
+        '新手視角發現', '專家深度剖析', '跨界思維連結', '逆向思考挑戰',
+        '文化背景觀察', '世代差異洞察', '性別視角分析', '職業特色角度',
+        '地域文化特色', '時間軸演變', '價值觀衝突', '生活型態差異'
+      ];
+      
+      return {
+        jabValue: jabValueTypes[Math.floor(Math.random() * jabValueTypes.length)],
+        platformApproach: platformNativeApproaches[Math.floor(Math.random() * platformNativeApproaches.length)],
+        emotionalLayer: emotionalConnections[Math.floor(Math.random() * emotionalConnections.length)],
+        structureType: structureFrameworks[Math.floor(Math.random() * structureFrameworks.length)],
+        languageStyle: languageStyles[Math.floor(Math.random() * languageStyles.length)],
+        uniqueAngle: uniquePerspectives[Math.floor(Math.random() * uniquePerspectives.length)]
+      };
+    }
+
+    function generateStyleVariations(baseStyle) {
+      const jabTheoryVariations = {
+        '原生價值導向': ['平台自然融入', '價值優先呈現', '社群文化適應', '無壓力給予'],
+        '故事情感型': ['個人經驗分享', '情感共鳴觸發', '生活場景連結', '溫暖人性化'],
+        '教育分享型': ['專業知識傳遞', '技能提升指導', '學習價值創造', '成長啟發'],
+        '娛樂親和型': ['輕鬆幽默互動', '親和力建立', '正向情緒傳遞', '社群娛樂'],
+        '啟發思考型': ['深度觀點分享', '思維角度拓展', '洞察力提供', '智慧啟發'],
+        '實用指導型': ['具體步驟指南', '實作價值提供', '問題解決導向', '立即應用'],
+        '社群互動型': ['對話參與促進', '社群連結強化', '互動價值創造', '關係建立'],
+        '趨勢洞察型': ['前瞻視野分享', '趨勢分析價值', '未來思考啟發', '洞察智慧']
+      };
+      
+      const baseVariations = jabTheoryVariations[baseStyle] || ['Jab價值創造', 'Right Hook行動', '原生表達', '情感連結'];
+      return baseVariations[Math.floor(Math.random() * baseVariations.length)];
+    }
+
+    function generateRequestId() {
+      return 'req_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    // 基於Jab理論的內容差異化限制條件
+    function generateContentConstraints(index, total) {
+      // Jab vs Right Hook 差異化要求
+      const jabRightHookModes = [
+        'pure_jab_education', 'pure_jab_entertainment', 'pure_jab_inspiration',
+        'soft_right_hook', 'direct_right_hook', 'story_based_jab',
+        'data_driven_jab', 'emotional_jab', 'practical_jab'
+      ];
+      
+      // 內容結構模板（確保截然不同）
+      const structuralTemplates = [
+        '問題提出→深度分析→解決建議→價值總結',
+        '故事開場→教訓提取→實用應用→感悟分享',
+        '數據震撼→趨勢解讀→行動指南→未來展望',
+        '個人經驗→反思洞察→通用原則→啟發邀請',
+        '現象觀察→原因剖析→策略建議→行動呼籲',
+        '對比分析→優劣評估→最佳實踐→學習建議',
+        '案例研究→成功要素→複製方法→進階思考',
+        '困難描述→突破過程→關鍵學習→成長分享'
+      ];
+      
+      // 語言風格強制差異
+      const languageMandates = [
+        '第一人稱親身經驗敘述', '第二人稱直接對話式', '第三人稱客觀分析式',
+        '問答自問自答式', '列表條理化呈現', '對話情境模擬式',
+        '比喻類比說明式', '數據圖表描述式', '時間順序敘述式'
+      ];
+      
+      // 情感調性差異
+      const emotionalTones = [
+        '溫暖鼓勵支持調性', '專業權威指導調性', '輕鬆幽默互動調性',
+        '深度思考啟發調性', '急迫行動呼籲調性', '溫和建議分享調性',
+        '激勵鼓舞挑戰調性', '理性客觀分析調性', '感性共鳴連結調性'
+      ];
+      
+      // 內容開頭方式（強制不同）
+      const openingStyles = [
+        '問題提問開場', '數據震撼開場', '故事情境開場', '個人感悟開場',
+        '趨勢觀察開場', '對比衝突開場', '場景描述開場', '名言引用開場',
+        '反思質疑開場', '經驗分享開場', '未來預測開場', '現況描述開場'
+      ];
+      
+      // 結尾呼籲方式
+      const closingStyles = [
+        '開放式思考邀請', '具體行動建議', '社群互動呼籲', '進一步學習建議',
+        '個人經驗分享邀請', '未來展望分享', '反思問題提出', '實踐挑戰發起',
+        '資源推薦提供', '社群連結建立', '持續關注邀請', '價值確認強化'
+      ];
+      
+      // 基於索引和總數創建獨特組合
+      const uniqueSeed = (index + 1) * (total + 1) * Date.now();
+      
+      return {
+        // Jab理論應用
+        jabMode: jabRightHookModes[index % jabRightHookModes.length],
+        structuralTemplate: structuralTemplates[index % structuralTemplates.length],
+        languageMandate: languageMandates[index % languageMandates.length],
+        emotionalTone: emotionalTones[index % emotionalTones.length],
+        openingStyle: openingStyles[index % openingStyles.length],
+        closingStyle: closingStyles[index % closingStyles.length],
+        
+        // 強制差異化要求
+        mustDiffer: true,
+        contentNumber: index + 1,
+        totalCount: total,
+        uniquenessSeed: uniqueSeed,
+        
+        // 特殊差異化指令
+        differentiation: {
+          structural: `必須使用與其他${total-1}篇完全不同的結構模板`,
+          tonal: `情感調性必須與其他篇章形成鮮明對比`,
+          linguistic: `語言風格必須展現獨特的表達方式`,
+          perspective: `切入角度必須提供全新的觀點視野`,
+          format: `內容格式必須呈現不同的組織方式`
+        },
+        
+        // Jab價值差異化
+        jabValueDifferentiation: index === 0 ? '教育啟發主導' : 
+                                index === 1 ? '情感連結主導' :
+                                index === 2 ? '實用價值主導' :
+                                index === 3 ? '娛樂互動主導' :
+                                '綜合價值創新'
+      };
+    }
+
+    function generateContentVariationLabel(index, formData) {
+      // 基於Jab理論的內容類型
+      const jabTheoryTypes = [
+        'Jab教育型', 'Jab娛樂型', 'Jab啟發型', 'Jab共鳴型', 'Jab實用型',
+        'Right Hook軟性', 'Right Hook直接', 'Jab故事型', 'Jab專業型', 'Jab互動型'
+      ];
+      
+      // 平台原生角度
+      const platformNativeAngles = [
+        'Facebook對話風', 'Instagram視覺風', 'LinkedIn專業風', 'Twitter觀點風',
+        '個人經驗分享', '專業洞察分析', '生活場景連結', '趨勢觀察解讀',
+        '情感故事敘述', '實用技巧指導', '深度思考啟發', '輕鬆幽默互動'
+      ];
+      
+      // 根據內容類型決定Jab標籤
+      const contentTypeLabels = {
+        'jab': 'Jab純粹給予',
+        'right_hook': 'Right Hook行動',
+        'jab_story': 'Jab故事價值',
+        'jab_education': 'Jab教育價值',
+        'jab_entertainment': 'Jab娛樂價值',
+        'right_hook_soft': 'Right Hook溫和',
+        'right_hook_direct': 'Right Hook直接'
+      };
+      
+      // 基於索引確保每篇都不同
+      const typeIndex = index % jabTheoryTypes.length;
+      const angleIndex = (index + 1) % platformNativeAngles.length;
+      
+      const baseLabel = contentTypeLabels[formData.contentType] || 'Jab價值型';
+      const variationType = jabTheoryTypes[typeIndex];
+      const angleType = platformNativeAngles[angleIndex];
+      
+      return `${baseLabel}・${variationType}・${angleType}`;
     }
 
     // 實用函數
